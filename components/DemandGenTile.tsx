@@ -11,6 +11,7 @@ import {
 
 export default function DemandGenTile() {
   const [leads, setLeads] = useState<number>(1240);
+  const [activeLayer, setActiveLayer] = useState<string | null>(null);
 
   // Simulate live lead counter
   useEffect(() => {
@@ -49,6 +50,12 @@ export default function DemandGenTile() {
     }
   };
 
+  const handleLayerClick = (name: string) => {
+    console.log(`Clicked layer: ${name}`);
+    setActiveLayer(name);
+    setTimeout(() => setActiveLayer(null), 300);
+  };
+
   return (
     <div className="relative flex aspect-square w-full max-w-[500px] items-center justify-center">
       {/* Background Glow */}
@@ -72,31 +79,47 @@ export default function DemandGenTile() {
           {/* Awareness */}
           <motion.div 
             variants={itemVariants}
-            className="h-10 w-64 rounded-xl border border-[#20d3ee]/40 bg-gradient-to-r from-emerald-500/20 to-[#20d3ee]/20 backdrop-blur-sm shadow-[0_0_20px_rgba(32,211,238,0.2)] flex items-center justify-center"
+            animate={activeLayer === 'Awareness' ? { scale: 1.1, filter: "brightness(1.5)", borderColor: "#ffffff" } : "visible"}
+            whileHover={{ scale: 1.05, borderColor: "#20d3ee" }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleLayerClick('Awareness')}
+            className="group cursor-pointer h-10 w-64 rounded-xl border border-[#20d3ee]/40 bg-gradient-to-r from-emerald-500/20 to-[#20d3ee]/20 backdrop-blur-sm shadow-[0_0_20px_rgba(32,211,238,0.2)] hover:shadow-[0_0_30px_rgba(32,211,238,0.4)] flex items-center justify-center transition-all duration-300"
           >
-            <span className="text-[10px] font-black uppercase tracking-widest text-cyan-200">Awareness</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-cyan-200 group-hover:text-cyan-100 transition-colors">Awareness</span>
           </motion.div>
 
           {/* Interest */}
           <motion.div 
             variants={itemVariants}
-            className="h-10 w-48 rounded-xl border border-[#20d3ee]/40 bg-gradient-to-r from-emerald-500/30 to-[#20d3ee]/30 backdrop-blur-sm shadow-[0_0_20px_rgba(32,211,238,0.2)] flex items-center justify-center"
+            animate={activeLayer === 'Interest' ? { scale: 1.1, filter: "brightness(1.5)", borderColor: "#ffffff" } : "visible"}
+            whileHover={{ scale: 1.05, borderColor: "#20d3ee" }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleLayerClick('Interest')}
+            className="group cursor-pointer h-10 w-48 rounded-xl border border-[#20d3ee]/40 bg-gradient-to-r from-emerald-500/30 to-[#20d3ee]/30 backdrop-blur-sm shadow-[0_0_20px_rgba(32,211,238,0.2)] hover:shadow-[0_0_30px_rgba(32,211,238,0.4)] flex items-center justify-center transition-all duration-300"
           >
-            <span className="text-[10px] font-black uppercase tracking-widest text-cyan-100">Interest</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-cyan-100 group-hover:text-white transition-colors">Interest</span>
           </motion.div>
 
           {/* Decision */}
           <motion.div 
             variants={itemVariants}
-            className="h-10 w-32 rounded-xl border border-[#20d3ee]/40 bg-gradient-to-r from-emerald-500/40 to-[#20d3ee]/40 backdrop-blur-sm shadow-[0_0_20px_rgba(16,185,129,0.2)] flex items-center justify-center"
+            animate={activeLayer === 'Decision' ? { scale: 1.1, filter: "brightness(1.5)", borderColor: "#ffffff" } : "visible"}
+            whileHover={{ scale: 1.05, borderColor: "#20d3ee" }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleLayerClick('Decision')}
+            className="group cursor-pointer h-10 w-32 rounded-xl border border-[#20d3ee]/40 bg-gradient-to-r from-emerald-500/40 to-[#20d3ee]/40 backdrop-blur-sm shadow-[0_0_20px_rgba(16,185,129,0.2)] hover:shadow-[0_0_30px_rgba(16,185,129,0.4)] flex items-center justify-center transition-all duration-300"
           >
-            <span className="text-[10px] font-black uppercase tracking-widest text-emerald-100">Decision</span>
+            <span className="text-[10px] font-black uppercase tracking-widest text-emerald-100 group-hover:text-white transition-colors">Decision</span>
           </motion.div>
 
           {/* Action */}
           <motion.div 
             variants={itemVariants}
-            className="h-10 w-20 rounded-xl border border-emerald-400 bg-emerald-500 backdrop-blur-sm shadow-[0_0_20px_rgba(16,185,129,0.4)] flex items-center justify-center"
+            animate={activeLayer === 'Action' ? { scale: 1.1, filter: "brightness(1.5)", borderColor: "#ffffff" } : "visible"}
+            whileHover={{ scale: 1.05, borderColor: "#34d399" }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleLayerClick('Action')}
+            className="group cursor-pointer h-10 w-20 rounded-xl border border-emerald-400 bg-emerald-500 backdrop-blur-sm shadow-[0_0_20px_rgba(16,185,129,0.4)] hover:shadow-[0_0_30px_rgba(16,185,129,0.6)] flex items-center justify-center transition-all duration-300"
           >
              <span className="text-[10px] font-black uppercase tracking-widest text-white">Action</span>
           </motion.div>
